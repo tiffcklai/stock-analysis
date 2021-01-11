@@ -10,7 +10,8 @@ Data analysis on green energy stocks with respect to their Total Daily Volume an
 To expand the dataset to allow the entire stock market to be analyzed, a plan was mapped out prior to any coding. The pre-existing code was evaluated to determine what needed to be kept and what was required to be changed or added to provide the deliverable. The instructions for the refactoring process was then entered as comments into the code to keep structure and provide a data trail for the additions to the code. The updated code and instructions is seen below. 
 
 ``` VBA
-  Sub AllStocksAnalysisRefactored()
+
+Sub AllStocksAnalysisRefactored()
 
     Dim startTime As Single
     Dim endTime  As Single
@@ -52,17 +53,17 @@ To expand the dataset to allow the entire stock market to be analyzed, a plan wa
     RowCount = Cells(Rows.Count, "A").End(xlUp).Row
     
     '1a) Create a ticker Index
-        
-        tickerindex = 0
-        
+        Dim tickerindex As Integer
+        tickerindex = 0       
+
     '1b) Create three output arrays
     
         Dim tickerVolumes(12) As Long
         
         Dim tickerStartingPrice(12) As Single
         
-        Dim tickerEndingPrice(12) As Single
-        
+        Dim tickerEndingPrice(12) As Single  
+    
     ''2a) Create a for loop to initialize the tickerVolumes to zero.
         
         For i = 0 To 11
@@ -75,8 +76,8 @@ To expand the dataset to allow the entire stock market to be analyzed, a plan wa
         
     ''2b) Loop over all the rows in the spreadsheet.
          
-         For i = 2 To RowCount
-            
+         For i = 2 To RowCount  
+    
         '3a) Increase volume for current ticker
             tickerVolumes(tickerindex) = tickerVolumes(tickerindex) + Cells(i, 8).Value
         
@@ -97,7 +98,7 @@ To expand the dataset to allow the entire stock market to be analyzed, a plan wa
             
             '3d Increase the tickerIndex.
             If Cells(i + 1, 1).Value <> tickers(tickerindex) And Cells(i, 1).Value = tickers(tickerindex) Then
-                tickerindex = tickerindex + 1
+                tickerindex = tickerindex + 1            
             
         'End If
             End If
@@ -127,9 +128,13 @@ To expand the dataset to allow the entire stock market to be analyzed, a plan wa
     For i = dataRowStart To dataRowEnd
         
         If Cells(i, 3) > 0 Then
-            Cells(i, 3).Interior.Color = vbGreen           
+            
+            Cells(i, 3).Interior.Color = vbGreen
+            
         Else
-            Cells(i, 3).Interior.Color = vbRed  
+        
+            Cells(i, 3).Interior.Color = vbRed
+            
         End If
         
     Next i
@@ -137,7 +142,7 @@ To expand the dataset to allow the entire stock market to be analyzed, a plan wa
     endTime = Timer
     MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
 
-  End Sub
+End Sub
 
 ```
 ## Results from data analysis
